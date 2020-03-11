@@ -14,6 +14,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
+
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -27,7 +31,11 @@ public class MainApplication extends Application implements ReactApplication {
           protected List<ReactPackage> getPackages() {
               return Arrays.<ReactPackage>asList(
                       new MainReactPackage(),
-                      new MapsPackage()
+                      new MapsPackage(),
+              new RNGooglePlacesPackage(), //<-- Add line
+              new GeolocationPackage()
+
+
               );
           }
 

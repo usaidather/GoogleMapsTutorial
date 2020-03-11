@@ -13,7 +13,7 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,
+  StatusBar, TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -28,12 +28,38 @@ import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } 
 
 import { locations } from './Data/Data'
 import CustomMarker from './source/CustomMarker'
+import RNGooglePlaces from 'react-native-google-places';
+import Geolocation from '@react-native-community/geolocation';
+
 
 
 export default class App extends Component {
+
+  getCurrentLocation(){
+    Geolocation.getCurrentPosition(info => console.log(info))
+  }
+
+  openSearchModal() {
+    RNGooglePlaces.openAutocompleteModal()
+    .then((place) => {
+		console.log(place);
+		// place represents user's selection from the
+		// suggestions and it is a simplified Google Place object.
+    })
+    .catch(error => console.log(error.message));  // error is a Javascript Error object
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
+         <TouchableOpacity
+          onPress={() => this.getCurrentLocation()}
+        >
+          <Text style = {{marginTop:40, padding: 30}} >Pick a location</Text>
+        </TouchableOpacity>
+
+
         <MapView
           provider={PROVIDER_GOOGLE}
           style={styles.map}
